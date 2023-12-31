@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QApplication, QFileDialog, QMainWindow
 import os
 from docxtpl import DocxTemplate
 from main_ui import Ui_MainWindow
-
+from lib import context
 class MyMainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -31,12 +31,6 @@ class MyMainWindow(QMainWindow):
         nameFrom = self.win.lineEdit_2.text()
         nameFrom = nameFrom + ".docx"
         doc = DocxTemplate(self.template_path)
-        context = {}
-        context['first'] = 'Первый.'
-        context['first2'] = 'Второй.'
-        context['first3'] = 'Третий.'
-        context['primer'] = 'Шаблон.'
-        context['name'] = 'Аяз.'
         doc.render(context)
         doc.save(nameFrom)
         is_check = self.win.checkBox.isChecked()
