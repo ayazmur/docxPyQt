@@ -1,14 +1,15 @@
-from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QFileDialog, QMainWindow
 import os
 from docxtpl import DocxTemplate
+from main_ui import Ui_MainWindow
 
 class MyMainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
         # Загрузка файла интерфейса
-        self.win = uic.loadUi("main.ui")
+        self.win = Ui_MainWindow()
+        self.win.setupUi(self)
         # Подключаем обработчик события к кнопке
         self.win.toolButton.clicked.connect(self.showFileDialog)
         self.win.pushButton.clicked.connect(self.generateDoc)
@@ -48,5 +49,5 @@ class MyMainWindow(QMainWindow):
 if __name__ == "__main__":
     app = QApplication([])
     window = MyMainWindow()
-    window.win.show()
+    window.show()
     app.exec_()
