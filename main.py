@@ -27,33 +27,21 @@ class MyMainWindow(QMainWindow):
             self.win.lineEdit.setText(only_name)
             self.template_path = only_name
     def generateDoc(self):
-
+        nameFrom = self.win.lineEdit_2.text()
+        nameFrom = nameFrom + ".docx"
+        doc = DocxTemplate(self.template_path)
+        context = {}
+        context['first'] = 'Первый.'
+        context['first2'] = 'Второй.'
+        context['first3'] = 'Третий.'
+        context['primer'] = 'Шаблон.'
+        context['name'] = 'Аяз.'
+        doc.render(context)
+        doc.save(nameFrom)
         is_check = self.win.checkBox.isChecked()
-
         if is_check:
-            nameFrom = self.win.lineEdit_2.text()
             if hasattr(self, 'template_path') and os.path.exists(self.template_path):
-                doc = DocxTemplate(self.template_path)
-                context = {}
-                context['first'] = 'Первый.'
-                context['first2'] = 'Второй.'
-                context['first3'] = 'Третий.'
-                context['primer'] = 'Шаблон.'
-                context['name'] = 'Аяз.'
-                doc.render(context)
-                doc.save(nameFrom)
                 os.system(f"start {nameFrom}")
-        else:
-            nameFrom = self.win.lineEdit_2.text()
-            doc = DocxTemplate(self.template_path)
-            context = {}
-            context['first'] = 'Первый.'
-            context['first2'] = 'Второй.'
-            context['first3'] = 'Третий.'
-            context['primer'] = 'Шаблон.'
-            context['name'] = 'Аяз.'
-            doc.render(context)
-            doc.save(nameFrom)
     def closeWindows(self):
         self.win.close()
 
