@@ -12,8 +12,13 @@ class MyMainWindow(QMainWindow):
         self.win.setupUi(self)
         # Подключаем обработчик события к кнопке
         self.win.toolButton.clicked.connect(self.showFileDialog)
+        self.win.toolButton.setToolTip("Откройте файл шаблона .docx")
         self.win.pushButton.clicked.connect(self.generateDoc)
+        self.win.pushButton.setToolTip("Нажмите кнопку для генерации выходного файла")
         self.win.pushButton_3.clicked.connect(self.closeWindows)
+        self.win.lineEdit.setToolTip("Введите название шаблона с расширением, либо введите его при помощи кнопки")
+        self.win.lineEdit_2.setToolTip("Введите название выходного файла БЕЗ расширения")
+        self.win.checkBox.setToolTip("Если чек бокс активирован, после генерации файла, он будет открыт")
 
     def showFileDialog(self):
         options = QFileDialog.Options()
@@ -38,7 +43,7 @@ class MyMainWindow(QMainWindow):
             if hasattr(self, 'template_path') and os.path.exists(self.template_path):
                 os.system(f"start {nameFrom}")
     def closeWindows(self):
-        self.win.close()
+        self.close()
 
 if __name__ == "__main__":
     app = QApplication([])
